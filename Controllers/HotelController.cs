@@ -26,7 +26,6 @@ namespace HotelListing.Controllers
             _mapper = mapper;
         }
 
-
         //Get All
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

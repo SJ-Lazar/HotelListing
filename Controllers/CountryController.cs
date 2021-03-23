@@ -26,6 +26,8 @@ namespace HotelListing.Controllers
             _mapper = mapper;
         }
 
+        #region HttpGet
+
         //Get All
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -53,7 +55,7 @@ namespace HotelListing.Controllers
         {
             try
             {
-                var country = await _uow.Countries.Get(q => q.Id == id, new List<string> {"Hotels"});
+                var country = await _uow.Countries.Get(q => q.Id == id, new List<string> { "Hotels" });
                 var result = _mapper.Map<CountryDTO>(country);
                 return Ok(result);
             }
@@ -62,9 +64,7 @@ namespace HotelListing.Controllers
                 _log.LogError(ex, $"Something went Wrong in the {nameof(GetCountry)}");
                 return StatusCode(500, "Internal Server Error. Please Try Again Later");
             }
-        }
-
-
-
+        } 
+        #endregion
     }
 }

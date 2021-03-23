@@ -17,6 +17,8 @@ using AutoMapper;
 using HotelListing.Configurations;
 using HotelListing.IRepository;
 using HotelListing.Repository;
+using Microsoft.AspNetCore.Identity;
+using HotelListing.Extensions;
 
 namespace HotelListing
 {
@@ -32,6 +34,12 @@ namespace HotelListing
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+            services.AddAuthentication();
+
+            services.ConfigureIdentity();
+
             //DbContext Service
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("sqlCon"))
