@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using HotelListing.Configurations;
 
 namespace HotelListing
 {
@@ -32,8 +34,6 @@ namespace HotelListing
                 options.UseSqlServer(Configuration.GetConnectionString("sqlCon"))
             );
 
-           
-
             //Cors Service
             services.AddCors(c => {
                 c.AddPolicy("AllowAllPolicy", 
@@ -43,6 +43,8 @@ namespace HotelListing
                                 .AllowAnyHeader());
             });
 
+            //AutoMapper Service
+            services.AddAutoMapper(typeof(MapperInitilizer));
 
             //Swagger Service
             services.AddSwaggerGen(c =>
