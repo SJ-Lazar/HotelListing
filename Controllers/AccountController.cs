@@ -55,6 +55,7 @@ namespace HotelListing.Controllers
                     return BadRequest($"User Registration Attempt Failed");
                 }
 
+                await _userManager.AddToRolesAsync(user, userDTO.Roles);
                 return Accepted();
             }
             catch (Exception ex)

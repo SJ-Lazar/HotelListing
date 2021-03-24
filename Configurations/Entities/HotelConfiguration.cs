@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace HotelListing.Configurations.Entities
 {
-    public class HotelConfiguration : IEntityTypeConfiguration<Country>
+    public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
     {
-        public void Configure(EntityTypeBuilder<Country> builder)
+        public void Configure(EntityTypeBuilder<Hotel> builder)
         {
             #region HotelSeedData
             builder.HasData(

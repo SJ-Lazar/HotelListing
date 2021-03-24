@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelListing.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210323201655_AddedIdentity")]
-    partial class AddedIdentity
+    [Migration("20210324001950_Add-Migration Init")]
+    partial class AddMigrationInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -207,6 +207,22 @@ namespace HotelListing.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "332ad584-4649-4b08-a50c-3eeb673398ca",
+                            ConcurrencyStamp = "6d8a1819-09cc-4dfc-bdf2-3d295bf2d714",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "0726a5a9-7073-40a1-9717-fb6c84a48a34",
+                            ConcurrencyStamp = "4f08b21b-7797-44d5-ae5d-1ca042df0e83",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
