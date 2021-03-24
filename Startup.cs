@@ -19,6 +19,7 @@ using HotelListing.IRepository;
 using HotelListing.Repository;
 using Microsoft.AspNetCore.Identity;
 using HotelListing.Extensions;
+using HotelListing.Services.AuthManager;
 
 namespace HotelListing
 {
@@ -35,15 +36,16 @@ namespace HotelListing
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-            services.AddAuthentication();
-
             services.ConfigureIdentity();
+
+            services.ConfigureJWT(Configuration);
 
             //DbContext Service
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("sqlCon"))
             );
+
+            services.AddAuthentication();
 
             //Cors Service
             services.AddCors(c => {
@@ -61,12 +63,13 @@ namespace HotelListing
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelListing", Version = "v1" });
-            });
-
-           
+            }); 
 
             //UnitOfWork Service
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            //Auth Service
+            services.AddScoped<IAuthManager, AuthManager>();
 
             //Controllers Service
             services.AddControllers().AddNewtonsoftJson(o => 
@@ -90,7 +93,7 @@ namespace HotelListing
             app.UseCors("AllowAllPolicy");
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
